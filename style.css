@@ -1,0 +1,93 @@
+:root {
+  --text: #E0F0FF;
+  --background: hsl(220, 60%, 8%);
+  --primary: #3377FF;
+  --secondary: #0c1a36;
+  --accent: #11df33;
+}
+
+* {
+  font-family: 'Ubuntu Mono', monospace;
+  cursor: default;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+#content {
+  background: var(--text);
+  background-repeat: no-repeat;
+  max-width: 768px;
+  padding: 20px;
+  padding-top: 0;
+  
+  margin-left: auto;
+  margin-right: auto;
+    
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#content p {
+  display: inline;
+}
+
+/* #content * {
+  background: transparent;
+  word-break: break-word;
+} */
+
+a {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+#switcher {
+  color: var(--primary);
+}
+
+header {
+  background: var(--secondary);
+  padding: 10px;
+  display: flex;
+}
+
+header img {
+  width: 50px;
+  margin: 10px; margin-right: 15px;
+  /*  i probably shouldnt do this 
+      yet here we are */
+}
+
+exp {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+exs {
+  border: 2px solid var(--accent);
+  font-size: calc(1em - 2px);
+  border-radius: 15px;
+  padding: 1px;
+}
+
+.img-group {
+  padding: 20px;
+  background: var(--secondary);
+  float: right;
+  display: grid;
+  width: 50%;
+  grid: auto-flow / minmax(0, 2fr);
+  border-radius: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.img-group img {
+  object-fit: cover;
+  max-width: 100%;
+}

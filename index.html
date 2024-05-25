@@ -1,155 +1,44 @@
 <!DOCTYPE html>
-
-<!--
-
-"Old Retro Computer Asset - IBM 1981 Style" (https://skfb.ly/owTBE) by Smoothie 3D is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-waves - haikei
-loading - https://www.reddit.com/r/web_design/comments/7wcg12/my_css_only_coding_loading_animation_nongif/
-work sans - google fonts
--->
-
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Krishna Kesavalu</title>
-		<link href="/art/load.css" rel="stylesheet" type="text/css" media="all">
-		<script src="https://unpkg.com/three@0.134.0/build/three.js"></script>
-		<script src="https://unpkg.com/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
-		<script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link href="/resources/icon.ico" type="image/png" rel="icon">
+		<title>hello!</title>
 	</head>
 	<body>
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
-
-			body {
-				margin: 0;
-				background-color: #4C964F;
-			}
-
-			#content-container {
-				width: 100vw;
-				position: absolute;
-				top: 3150px;
-			}
-
-			#transsec {
-				background-color: #4C964F;
-				height: 125vh;
-			}
-
-			.waves {
-				aspect-ratio: 9/2;
-				width: 100%;
-			}
-
-			#sec1 {
-				background-color: #001122;
-				height: 100vh;
-				position: relative;
-				top: -10px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-
-			#canv {
-				position: fixed;
-				top 0;
-				left: 0;
-			}
-
-			* {
-				font-family: 'Work Sans', sans-serif;
-				color: white;
-			}
-
-			#loadercont {
-				position: static;
-				top: 0;
-				left: 0;
-				width: 100vw;
-				height: 100vh;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
-				background-color: black;
-			}
-
-		</style>
-		<div id = "loadercont">
-			<svg id = "loading" width="400px" height="165px" viewBox="0 0 400 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Artboard</title><desc>Created with Sketch.</desc><defs></defs><g id="coding" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Artboard"><g id="group1"><g id="line1"><rect id="dash-1" fill="#F92672" x="0" y="0" width="40" height="20" rx="10"></rect><rect id="dash-2" fill="#A6E22E" x="43" y="0" width="60" height="20" rx="10"></rect><rect id="dash-3" fill="#FFE792" x="106" y="0" width="100" height="20" rx="10"></rect><rect id="dash-4" fill="#FFE792" x="209" y="0" width="70" height="20" rx="10"></rect></g><g id="line2" transform="translate(30.000000, 27.000000)"><rect id="dash-1" fill="#F92672" x="0" y="0" width="40" height="20" rx="10"></rect><rect id="dash-2" fill="#A6E22E" x="43" y="0" width="60" height="20" rx="10"></rect><rect id="dash-3" fill="#FFE792" x="106" y="0" width="80" height="20" rx="10"></rect></g><rect id="line6" fill="#F92672" x="0" y="135" width="40" height="20" rx="10"></rect><rect id="line3" fill="#F8F8F2" x="60" y="54" width="290" height="20" rx="10"></rect><rect id="line4" fill="#F8F8F2" x="60" y="81" width="225" height="20" rx="10"></rect><rect id="line5" fill="#F92672" x="30" y="108" width="40" height="20" rx="10"></rect></g><g id="group2"><g id="line1"><rect id="dash-1" fill="#F92672" x="0" y="0" width="40" height="20" rx="10"></rect><rect id="dash-2" fill="#A6E22E" x="43" y="0" width="60" height="20" rx="10"></rect><rect id="dash-3" fill="#FFE792" x="106" y="0" width="100" height="20" rx="10"></rect><rect id="dash-4" fill="#FFE792" x="209" y="0" width="70" height="20" rx="10"></rect></g><g id="line2" transform="translate(30.000000, 27.000000)"><rect id="dash-1" fill="#F92672" x="0" y="0" width="40" height="20" rx="10"></rect><rect id="dash-2" fill="#A6E22E" x="43" y="0" width="60" height="20" rx="10"></rect><rect id="dash-3" fill="#FFE792" x="106" y="0" width="80" height="20" rx="10"></rect></g><rect id="line6" fill="#F92672" x="0" y="135" width="40" height="20" rx="10"></rect><rect id="line3" fill="#F8F8F2" x="60" y="54" width="290" height="20" rx="10"></rect><rect id="line4" fill="#F8F8F2" x="60" y="81" width="225" height="20" rx="10"></rect><rect id="line5" fill="#F92672" x="30" y="108" width="40" height="20" rx="10"></rect></g></g></g></svg>
-			<p id = "loadingcaption">Lorem ipsum dolor.</p>
-		</div>
-		<div id = "content-container">
-			<div id = "transsec"></div>
-			<img class = "waves" src = "art/waves.svg">
-			<div id = "sec1">
-				<p style = "font-size: 10vw; position: relative; top: -50px;">Lorem ipsum dolor.</p>
-				<div id = "projectcontainer">
-					<div class = "project">
-					</div>
-				</div>
-			</div>
-		</div>
-		<canvas id = "canv"></canvas>
-
-		<script>
-			$("#canv").hide()
-			$('body').css({'overflow':'hidden'});
-			$(document).bind('scroll',function () { 
-				window.scrollTo(0,0); 
-			});
-			const captions = ["Hiring elves...", "Building website...", "Eating cookies..."]
-
-			var t = setInterval(() => {
-				var c = captions[Math.floor(Math.random() * captions.length)]
-				while (c == $("#loadingcaption").text()) c = captions[Math.floor(Math.random() * captions.length)]
-				$("#loadingcaption").text(c)
-			}, 500)
-
-			window.onload = () => {
-				const scene = new THREE.Scene();
-				const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.025, 1000 );
-				const renderer = new THREE.WebGLRenderer({canvas: document.getElementById("canv")});
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-				var computer = new THREE.Object3D();
-				camera.position.z += 1
-
-				const loader = new THREE.GLTFLoader();
-				loader.load( 'models/computer/scene.gltf', function ( gltf ) {
-					computer = gltf.scene
-					gltf.scene.position.y -= 0.25
-					scene.add( gltf.scene );
-					$("#loadercont").hide();
-					$("#canv").show()
-					$(document).unbind('scroll'); 
-					$('body').css({'overflow':'visible'});
-				},undefined,function (error){
-					alert( error );
-				} );
-
-
-				scene.add(new THREE.AmbientLight( 0xFFFFFF ))
-
-				function animate() {
-					requestAnimationFrame( animate );
-
-					renderer.render(scene, camera);
-				}
-				animate();
-
-				document.onscroll = () => {
-					const t = window.scrollY/5;
-					computer.rotation.y = -Math.min(t, 632)/100;
-					camera.position.z = 1 - Math.min(t, 632)/775
-					if (t > 632) $("#canv").hide()
-					else $("#canv").show()
-				}				
-			}
-
-		</script>
-	</body>
+    <script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src = "main.js"></script>
+    <header>
+      <img id="header-img" src="/resources/icon.svg">
+      <h1>krisk</h1>
+    </header>
+    <div id = "content">
+      <br>
+      <p>
+        hi! im krisk (<a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet" target="_blank">/krɪsk/</a>), <span id="switcher">programmer</span>.
+        <br><br>
+        this site is an <exp>amalgam<exs>(which is spelled with an "a" for some godforsaken reason)</exs></exp> of some of <exp>the things i have done<exs>(the list is large because i have a very short attention span)</exs></exp>.
+      </p>
+      <h2>number boxes!</h2>
+      <p>i, like the majority of people with personal websites, am a big fan of computers. i grew up on the internet and originally learned python in the fourth grade. since then, i've been gradually building my <exp>repertoire<exs>(??? what is this word??)</exs></exp> of languages, <exp>including<exs>(but not limited to)</exs></exp> python, javascript, java, rust, and tibasic.
+      <br><br>
+      i'm not really sure how to explain what i do with computers, because the answer encompasses pretty much all of computing. programming language design? yup. websites? (obviously) yes. games? oui. functional programming? はい. minecraft modding? आम्. everything in computing makes me incredibly excited, and i can't stop myself from jumping from project to project! here's a brief overview of what i've done:
+      <h3>3d renderers!</h3>
+      <div class="img-group">
+        <img src="resources/imgs/desmos3drenderer.png" alt="a picture of a cube, rendered in the graphing calculator desmos.">
+        <img src="resources/imgs/knight3drender.png" alt="a picture of a chess knight, rendered for a pen plotter.">
+      </div>
+      <p>i love making 3d renderers! one of my first was this desmos one (before desmos3d came out) and one of my latest ones was for <a href="https://blot.hackclub.com" target="_blank">a pen plotter</a>!</p>
+      <h3>programming languages!</h3>
+      <p>i really enjoy making esoteric programming languages as well! i lost most of them in <em>the great purge</em>, in which i was forced to wipe my hard drive :(. my favourite is called sokoban, which is a befunge type language without a stack!</p>
+      <h3>websites</h3>
+      <p>i also have made a ton of websites (most of which were also lost in <em>the great purge</em> <exp>:(<exs>(<a href="https://xkcd.com/541/" target="_blank">relevant xkcd</a>)</exs></exp>). please remember to back up your files, don't learn the hard way! anyway, my favourite is definitely <a href=".">this page</a>.</p>
+      <h3></h3>
+    </div>
+  </body>
 </html>
