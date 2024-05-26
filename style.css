@@ -80,7 +80,7 @@ exs {
   background: var(--secondary);
   float: right;
   display: grid;
-  width: 50%;
+  width: 33%;
   grid: auto-flow / minmax(0, 2fr);
   border-radius: 25px;
   margin-left: 5px;
