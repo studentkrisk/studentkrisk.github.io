@@ -1,3 +1,5 @@
+import * as THREE from 'three'
+
 const hobbies = ["programmer", "space pirate", "linguist", "conlanger", "card counter", "crocheter", "earthbounder", "FOSSer", "3d printer", "toki ponist", "wannabe polymath"]
 
 function updateGradient(x, y) {
@@ -41,27 +43,57 @@ onload = () => {
     })
   }
 
-  const myGraph = ForceGraph3D()(document.getElementById("3d-graph"))
-    .graphData({
-      "nodes": [
-          {
-            "id": "id1",
-            "name": "name1",
-            "val": 1
-          },
-          {
-            "id": "id2",
-            "name": "name2",
-            "val": 10
-          }
-      ],
-      "links": [
-          {
-              "source": "id1",
-              "target": "id2"
-          }
-      ]
-  })
-  .width($("#content").innerWidth())
-  .backgroundColor($("body").css("--background"))
+  const simulation = d3.forceSimulation(
+    [
+      {
+        "index": 0,
+        "x": 0/0,
+        "y": 0/0,
+        "z": 0/0,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0
+      },
+      {
+        "index": 1,
+        "x": 0/0,
+        "y": 0/0,
+        "z": 0/0,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0
+      }
+    ], 3)
+    
+    d3.forceLink([{"source": 0, "target": 1}])
+    let nodes = simulation.nodes()
+    simulation.on("tick", () => nodes = simulation.nodes())
+
+    let camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 100 );
+    camera.position.z = 2;
+
+    let scene = new THREE.Scene();
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial();
+
+    let mesh = new THREE.Mesh( geometry, material );
+    scene.add( mesh );
+
+    let renderer = new THREE.WebGLRenderer({canvas: $("#3d-graph").get()});
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setAnimationLoop( animate );
+
+
+    window.addEventListener( 'resize', onWindowResize );
+
+
+    function animate() {
+
+      mesh.rotation.x += 0.005;
+      mesh.rotation.y += 0.01;
+
+      renderer.render( scene, camera );
+
+    }
 }

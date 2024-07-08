@@ -15,13 +15,18 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@<version>/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@<version>/examples/jsm/"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/"
         }
       }
     </script>
-    <script src="//unpkg.com/3d-force-graph"></script>
-    <script src = "main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-dispatch@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-quadtree@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-timer@3"></script>
+    <script src="https://unpkg.com/d3-binarytree"></script>
+    <script src="https://unpkg.com/d3-octree"></script>
+    <script src="https://unpkg.com/d3-force-3d"></script>
+    <script src = "main.js" type="module"></script>
     <header>
       <img id="header-img" src="resources/icon.svg">
       <h1>krisk</h1>
@@ -38,7 +43,7 @@
       <br><br>
       i'm not really sure how to explain what i do with computers, because the answer encompasses pretty much all of computing. programming language design? yup. websites? (obviously) yes. games? oui. functional programming? はい. minecraft modding? आम्. everything in computing makes me incredibly excited, and i can't stop myself from jumping from project to project! here's a map of what i've done!</p>
       <br>
-      <div id="3d-graph"></div>
+      <canvas id="3d-graph"></canvas>
     </div>
   </body>
 </html>
