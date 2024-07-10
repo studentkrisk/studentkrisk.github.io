@@ -3,7 +3,7 @@
   --background: hsl(220, 60%, 8%);
   --primary: #3377FF;
   --secondary: #0c1a36;
-  --accent: #11df33;
+  --accent: #3377FF;
 }
 
 * {
@@ -34,6 +34,7 @@ body {
 
 #content p {
   display: inline;
+  cursor: text;
 }
 
 /* #content * {
@@ -93,4 +94,45 @@ exs {
 }
 
 canvas {
+  position: absolute;
+}
+
+#info-card {
+  background-color: var(--secondary);
+  float: right;
+  max-width: 250px;
+  padding: 20px;
+  border-radius: 25px;
+  position: absolute;
+  right: 0;
+  color: white;
+}
+
+@media (max-width : 320px) {
+  #info-card {
+    max-width: 100%;
+    float: none;
+    border-bottom-right-radius: 25px;
+    position: static;
+  }
+  canvas {
+    position: static;
+  }
+}
+
+#info-card-next {
+  margin-top: 10px;
+}
+
+.info-card-btn {
+  background-color: var(--accent);
+  padding: 10px;
+  min-width: 0;
+  cursor: pointer;
+  border: 1px solid var(--background);
+  transition-duration: 0.25s;
+}
+
+.info-card-btn:hover {
+  filter: brightness(0.75);
 }

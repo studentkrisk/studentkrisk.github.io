@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const hobbies = ["programmer", "space pirate", "linguist", "conlanger", "card counter", "crocheter", "earthbounder", "FOSSer", "3d printer", "toki ponist", "wannabe polymath"]
 
+const now = new Date();
+const dayOfYear = (Math.floor(now/8.64e7) % 365)/365 * 360;
+$("html")[0].style.setProperty('--accent', `hsl(${dayOfYear}deg 86% 47%)`);
+
 function updateGradient(x, y) {
   let content = $("#content")[0];
   content.setAttribute("style", `background: radial-gradient(circle at ${x - content.getBoundingClientRect().left}px ${y - content.getBoundingClientRect().top}px, var(--primary) 0, var(--accent) 2.5vw, var(--text) 5vw); background-clip: text; -webkit-background-clip: text;`);
@@ -26,9 +30,6 @@ onload = () => {
     } while (switchTo == $("#switcher").html())
     $("#switcher").html(switchTo)
   }, 1000)
-  let now = new Date();
-  let dayOfYear = (Math.floor(now/8.64e7) % 365)/365 * 360;
-  $("html")[0].style.setProperty('--accent', `hsl(${dayOfYear}deg 86% 47%)`);
 
   let exppar = $("exp");
   exppar.children("exs").css("display", "none")
@@ -72,7 +73,7 @@ onload = () => {
     "fy": 0,
     "fz": 0
   }]
-  for (var i of node_ids.slice(1)) {
+  for (let i of node_ids.slice(1)) {
     nodes.push({
       "id": i.id,
       "tags": i.tags,
@@ -107,9 +108,9 @@ onload = () => {
   let scene = new THREE.Scene();
 
   let boxes = []
-  for (var n of nodes) {
-    var geometry = new THREE.BoxGeometry();
-    var material = new THREE.MeshBasicMaterial();
+  for (let n of nodes) {
+    let geometry = new THREE.BoxGeometry();
+    let material = new THREE.MeshBasicMaterial();
 
     let mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(n.x, n.y, n.z)
@@ -117,12 +118,13 @@ onload = () => {
     boxes.push(mesh)
   }
 
-  var lines = []
-  for (var l of links) {
-    var geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(l.source.x, l.source.y, l.source.z), new THREE.Vector3(l.target.x, l.target.y, l.target.z)])
-    var material = new THREE.LineBasicMaterial({color: 0x0000ff});
+  let lines = []
+  for (let l of links) {
+    let geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(l.source.x, l.source.y, l.source.z), new THREE.Vector3(l.target.x, l.target.y, l.target.z)])
+    let material = new THREE.LineBasicMaterial({color: 0x0000ff});
 
     let mesh = new THREE.Line(geometry, material);
+    mesh.frustumCulled = false;
     scene.add(mesh)
     lines.push(mesh)
   }
@@ -142,19 +144,18 @@ onload = () => {
   controls.minDistance = 10
   controls.enableDamping = true
 
-  var current = 0
+  let current = 0
 
-  changeTargetTo(boxes[0])
+  changeTargetTo()
 
   function animate() {
 
-    var can_travel_to = []
-    for (var i = 0; i < boxes.length; i++) {
+    for (let i = 0; i < boxes.length; i++) {
       boxes[i].position.set(nodes[i].x, nodes[i].y, nodes[i].z)
     }
 
-    for (var i = 0; i < lines.length; i++) {
-      var l = links[i]
+    for (let i = 0; i < lines.length; i++) {
+      let l = links[i]
       lines[i].geometry.setFromPoints([new THREE.Vector3(l.source.x, l.source.y, l.source.z), new THREE.Vector3(l.target.x, l.target.y, l.target.z)])
     }
 
@@ -165,23 +166,29 @@ onload = () => {
 
   }
 
-  onkeydown = (e) => {
-    if (e.key != "n") return
-
-    current = (current + 1) % nodes.length
-    changeTargetTo(boxes[current], controls)
-  }
-
-  var can_travel_to = []
-  function changeTargetTo(box) {
-    can_travel_to = []
-    var counter = 0
-    var interval = setInterval(() => {
+  function changeTargetTo() {
+    let box = boxes[current]
+    let counter = 0
+    let interval = setInterval(() => {
       controls.target.lerp(box.position, (++counter)/10)
       if (counter >= 10) clearInterval(interval)
     }, 25)
-    for (var n of nodes) if (n != nodes[current] && n.tags.some(r => nodes[current].tags.includes(r))) can_travel_to.push(n)
-    console.log(can_travel_to)
-    console.log(changeTargetTo)
-}
+    $("#info-card-header").html(nodes[current].id)
+    $("#info-card-next").html("")
+    for (let n = 0; n < nodes.length; n++) {
+      let node = nodes[n]
+      if (node != nodes[current] && node.tags.some(r => nodes[current].tags.includes(r))) {
+        $("#info-card-next").append(`<div class="info-card-btn">${node.id}</div>`)
+        $("#info-card-next").children().last().on("click", (
+            () => {
+              current = n
+              changeTargetTo()
+            })) // hacky workaround
+      }
+    }
+    $("#info-card-next").children().first().css("border-top-left-radius", "15px")
+    $("#info-card-next").children().first().css("border-top-right-radius", "15px")
+    $("#info-card-next").children().last().css("border-bottom-left-radius", "15px")
+    $("#info-card-next").children().last().css("border-bottom-right-radius", "15px")
+  }
 }
