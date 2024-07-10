@@ -91,3 +91,6 @@ exs {
   object-fit: cover;
   max-width: 100%;
 }
+
+canvas {
+}
