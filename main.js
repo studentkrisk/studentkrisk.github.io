@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const hobbies = ["programmer", "space pirate", "linguist", "conlanger", "card counter", "crocheter", "earthbounder", "FOSSer", "3d printer", "toki ponist", "wannabe polymath"]
 
@@ -47,12 +48,15 @@ onload = () => {
     [
       {
         "index": 0,
-        "x": 0/0,
-        "y": 0/0,
-        "z": 0/0,
+        "x": 0,
+        "y": 0,
+        "z": 0,
         "vx": 0,
         "vy": 0,
-        "vz": 0
+        "vz": 0,
+        "fx": 0,
+        "fy": 0,
+        "fz": 0
       },
       {
         "index": 1,
@@ -105,7 +109,7 @@ onload = () => {
     simulation.on("tick", () => nodes = simulation.nodes())
 
     let camera = new THREE.PerspectiveCamera( 70, 1/1, 0.1, 100 );
-    camera.position.z = 40;
+    camera.position.z = -40;
 
     let scene = new THREE.Scene();
 
@@ -126,6 +130,13 @@ onload = () => {
     renderer.setSize($("#3d-graph").parent().width(), $("#3d-graph").parent().width())
     renderer.setAnimationLoop(animate);
 
+    const controls = new OrbitControls( camera, renderer.domElement );
+    controls.autoRotate = true
+    controls.enablePan = false
+    controls.enableZoom = false
+    controls.maxDistance = 40
+    controls.minDistance = 40
+
     var current = 0
     function animate() {
 
@@ -133,11 +144,26 @@ onload = () => {
         boxes[i].position.set(nodes[i].x, nodes[i].y, nodes[i].z)
       }
 
-      boxes[0].rotation.x += 0.005;
-      boxes[0].rotation.y += 0.01;
-      camera.position.set(boxes[current].position)
-
-      renderer.render( scene, camera );
+      boxes[0].rotation.x -= 0.005;
+      boxes[0].rotation.y -= 0.01;
+      controls.update()
+      renderer.render(scene, camera);
 
     }
+
+    onkeydown = (e) => {
+      if (e.key != "n") return
+
+      current = (current + 1) % nodes.length
+      changeTargetTo(boxes[current], controls)
+    }
+}
+
+function changeTargetTo(box, controls) {
+  var counter = 0
+  var interval = setInterval(() => {
+    controls.target.lerp(box.position, (++counter)/10)
+    if (counter >= 10) clearInterval(interval)
+  }, 25)
+  
 }
